@@ -1,4 +1,4 @@
-const mongoose = requrire('mongoose');
+const mongoose = require('mongoose');
 
 const prductSchema= new mongoose.Schema({
   id: { type:String, unique: true },
