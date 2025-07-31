@@ -1,70 +1,36 @@
-// import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 
-// function ProductList() {
-//   const [products, setProducts] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(false);
-
-//   useEffect(() => {
-//     fetch('http://localhost:5000/api/products')
-//       .then(res => res.json())
-//       .then(data => {
-//         setProducts(data.data);
-//         setLoading(false);
-//       })
-//       .catch(() => {
-//         setError(true);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   if (loading) return <p>Loading products...</p>;
-//   if (error) return <p>Failed to load products.</p>;
-
-//   return (
-//     <div className="container">
-//       <h1>All Products</h1>
-//       <div className="grid">
-//         {products.map(product => (
-//           <Link key={product.id} to={`/product/${product.id}`} className="card">
-//             <h3>{product.name}</h3>
-//             <p>₹{product.retail_price}</p>
-//             <p><strong>{product.brand}</strong></p>
-//           </Link>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default ProductList;
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')  // update if different
+    fetch('http://localhost:5000/api/products')
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => {
+        if (Array.isArray(data.data)) {
+          setProducts(data.data);
+        }
+      });
   }, []);
 
   return (
-    <div>
-      <h1>All Products</h1>
-      {products.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {products.map(p => (
-            <li key={p._id}>
-              <Link to={`/product/${p._id}`}>{p.name} - ₹{p.retail_price}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Products</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products.map(product => (
+          <Link
+            to={`/products/${product.id}`}
+            key={product.id}
+            className="block border rounded p-4 shadow hover:bg-gray-100"
+          >
+            {/* <h3 className="font-semibold">{product.name}</h3>
+            <p>₹{product.retail_price}</p>
+            <p className="text-sm text-gray-500">{product.brand}</p> */}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

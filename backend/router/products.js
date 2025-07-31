@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
 
   try {
     const products = await Product.find().skip(skip).limit(limit);
+    // res.json(products); 
     res.status(200).json({ success: true, data: products });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server Error' });
@@ -19,11 +20,13 @@ router.get('/', async (req, res) => {
 // GET /api/products/:id — Get by ID
 router.get('/:id', async (req, res) => {
   try {
-    const product = await Product.findOne({ id: req.params.id });
+        const product = await Product.findOne({ id: req.params.id });
     if (!product) {
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
-    res.status(200).json({ success: true, data: product });
+            // res.json(product); 
+
+    res.status(200).json( product);
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server Error' });
   }
