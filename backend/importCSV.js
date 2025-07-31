@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const Product = require('./models/Product');
 require('dotenv').config();
 
-const zipPath = './archive.zip';
-const csvFileName = 'products.csv';
+// const zipPath = './archive.zip';
+// const csvFileName = 'products.csv';
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -15,8 +15,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // Step 1: Unzip and extract products.csv
 function importCSV(){
-    fs.createReadStream(zipPath)
-  .pipe(unzipper.ParseOne(csvFileName))
+fs.createReadStream('./data/products.csv') 
+//   .pipe(unzipper.ParseOne('products.csv'))
   .pipe(csv())
   .on('data', async (row) => {
     try {
@@ -26,7 +26,7 @@ function importCSV(){
         category: row.category,
         name: row.name,
         brand: row.brand,
-        retail_price: parseFloat(row['retail price']),
+        retail_price: parseFloat(row['retail_price']),
         department: row.department,
         sku: row.sku,
         distribution_center_id: row.distribution_center_id
