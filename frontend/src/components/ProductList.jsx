@@ -25,8 +25,8 @@ function ProductList() {
             key={product.id}
             className="block border rounded p-4 shadow hover:bg-gray-100"
           >
-            {/* <h3 className="font-semibold">{product.name}</h3>
-            <p>₹{product.retail_price}</p>
+           <h3 className="font-semibold">{product.name}</h3>
+            {/* <p>₹{product.retail_price}</p>
             <p className="text-sm text-gray-500">{product.brand}</p> */}
           </Link>
         ))}
