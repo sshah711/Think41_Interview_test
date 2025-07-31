@@ -14,7 +14,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch(err => console.error(err));
 
 // Step 1: Unzip and extract products.csv
-fs.createReadStream(zipPath)
+function importCSV(){
+    fs.createReadStream(zipPath)
   .pipe(unzipper.ParseOne(csvFileName))
   .pipe(csv())
   .on('data', async (row) => {
@@ -38,3 +39,4 @@ fs.createReadStream(zipPath)
     console.log('CSV import complete.');
     mongoose.disconnect();
   });
+}
