@@ -2,8 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './pages/ProductList';
-import ProductDetails from './pages/ProductDetails';
-import AllProducts from './pages/AllProducts';
+import ProductDetails from './pages/ProductDetail';
+import AllProducts from './pages/AllProduct';
 import DepartmentPage from './pages/DepartmentPage';
 
 const App = () => {

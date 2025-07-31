@@ -16,6 +16,7 @@ export default function DepartmentPage() {
       .then(res => setProducts(res.data))
       .catch(err => console.error(err));
   }, [department._id]);
+  
 
   return (
     <div>
